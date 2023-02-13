@@ -10,4 +10,18 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("GamePlay"); // This will load to the scene called "GamePlay".
     }
 
+    public void instructions()
+    {
+        SceneManager.LoadScene("Instructions");
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
+
+    public void mainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
