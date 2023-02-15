@@ -3,18 +3,27 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BelowScreen
+  - Enemy
+  - Bullet
+  - EnemyBullet
+  - AboveScreen
+  - ByPass
+  - Meat
+  - Meat2
+  - BossStage
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - PlayerBullet
+  - Enemy
+  - ByPass
+  - BossStage
   - 
   - 
   - 
