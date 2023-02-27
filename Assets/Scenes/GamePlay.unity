@@ -514,6 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668007928}
   - component: {fileID: 1668007927}
+  - component: {fileID: 1668007929}
   m_Layer: 0
   m_Name: RandomEnemy Spawner
   m_TagString: Untagged
@@ -542,8 +543,9 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 2206167726168010041, guid: 72a5739be18fc3f4a9b4d98ff917b958, type: 3}
   - {fileID: 1217151259945725203, guid: e1a1799f81f084d4bb846b84c6f2a925, type: 3}
-  minTime: 8
-  maxTime: 12
+  minTime: 6
+  maxTime: 7
+  kill: 0
 --- !u!4 &1668007928
 Transform:
   m_ObjectHideFlags: 0
@@ -564,6 +566,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668007929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668007926}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96e05ce917c7904d9910fe4dc2985ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RS: {fileID: 1668007927}
+  minionScript: {fileID: 1668007926}
+  FinalBossPrefab: {fileID: 5701034914861035247, guid: ff3713d6ac878184d9a2bbdb602f76b5, type: 3}
+  SpawnLocation: {fileID: 270139030}
 --- !u!1 &1699878556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,9 +1296,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2123311322}
     - target: {fileID: 3900268171521689592, guid: 559702cccc047c0469af26e917c3960d, type: 3}
+      propertyPath: FireRate
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900268171521689592, guid: 559702cccc047c0469af26e917c3960d, type: 3}
       propertyPath: finalBoss
       value: 
       objectReference: {fileID: 5701034914861035247, guid: ff3713d6ac878184d9a2bbdb602f76b5, type: 3}
+    - target: {fileID: 3900268171521689592, guid: 559702cccc047c0469af26e917c3960d, type: 3}
+      propertyPath: maxHealth
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3900268171521689592, guid: 559702cccc047c0469af26e917c3960d, type: 3}
       propertyPath: enemySpawner
       value: 
@@ -1289,6 +1315,10 @@ PrefabInstance:
       propertyPath: SpawnLocation
       value: 
       objectReference: {fileID: 270139030}
+    - target: {fileID: 3900268171521689592, guid: 559702cccc047c0469af26e917c3960d, type: 3}
+      propertyPath: BossSpawnGameObject
+      value: 
+      objectReference: {fileID: 1668007926}
     - target: {fileID: 3900268171521689593, guid: 559702cccc047c0469af26e917c3960d, type: 3}
       propertyPath: m_RootOrder
       value: 1

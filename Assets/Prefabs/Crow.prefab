@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  maxHealth: 2
+  maxHealth: 5
   currentHealth: 0
   healthBar: {fileID: 5592905311092027177}
   meat: {fileID: 4575783075733304507, guid: bb141fc25121cc44d8fcfbc304079457, type: 3}

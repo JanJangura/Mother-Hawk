@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Boss Spawn")]
+    public GameObject BossSpawnGameObject;
+
     [Header("LayerMasks")]
     public LayerMask bulletLayerMask;
     public LayerMask playGameObject;
@@ -113,9 +116,10 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if(MM.meatCount == 10)
+            if(MM.meatCount >= 10)
             {
-                SceneManager.LoadScene("VictoryScreen");
+                BossSpawnGameObject.GetComponent<FinalBossSpawn>().enabled = true;
+             // SceneManager.LoadScene("VictoryScreen");
             }
         }
     }

@@ -13,6 +13,8 @@ TagManager:
   - Meat
   - Meat2
   - BossStage
+  - Tag
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - Enemy
   - ByPass
   - BossStage
-  - 
+  - Boss
   - 
   - 
   - 

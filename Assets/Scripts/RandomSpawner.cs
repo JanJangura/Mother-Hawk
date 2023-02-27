@@ -14,6 +14,7 @@ public class RandomSpawner : MonoBehaviour
     private int randEnemy;
     private int randSpawnPoint;
     private int randNumOfEnemies;
+    public bool kill = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class RandomSpawner : MonoBehaviour
         randNumOfEnemies = Random.Range(0, spawnPoints.Length);
     }
 
-    void SpawnEnemy()
+    public void SpawnEnemy()
     {
         if (randSpawnPoint + randNumOfEnemies > spawnPoints.Length)
         {
@@ -49,20 +50,22 @@ public class RandomSpawner : MonoBehaviour
         Invoke("SpawnEnemy", spawnTimer); // Recurrsion
     }
 
-    private IEnumerator MultipleEnemies(float interval, GameObject enemy)
+    public IEnumerator MultipleEnemies(float interval, GameObject enemy)
     {
         yield return new WaitForSeconds(interval);
 
         int numOfEnemies = spawnPoints.Length - randSpawnPoint;
-        int difference = randSpawnPoint + numOfEnemies;
-
+        int difference = randSpawnPoint + numOfEnemies;       
         for (int i = randSpawnPoint; i < difference; i++)
         {
-            // Random Prefab Generator selected from list from 0 to the list length
-            randEnemy = Random.Range(0, enemyPrefabs.Length);
+            if (!kill)
+            {
+                // Random Prefab Generator selected from list from 0 to the list length
+                randEnemy = Random.Range(0, enemyPrefabs.Length);
 
-            // Spawn enemies here -> (The prefab, position, Quaternion.Identity)
-            Instantiate(enemyPrefabs[randEnemy], spawnPoints[i].position, Quaternion.identity);
+                // Spawn enemies here -> (The prefab, position, Quaternion.Identity)
+                Instantiate(enemyPrefabs[randEnemy], spawnPoints[i].position, Quaternion.identity);
+            }          
         }
     }
 }

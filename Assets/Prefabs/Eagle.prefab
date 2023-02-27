@@ -401,8 +401,7 @@ GameObject:
   - component: {fileID: 3319941997273568604}
   - component: {fileID: 7544891064202570301}
   - component: {fileID: 6263013611011279745}
-  - component: {fileID: 2078990700142716673}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Eagle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -542,8 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96d223ad5e25d84b80e0707c2ca783d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  maxHealth: 25
+  speed: 0.5
+  maxHealth: 250
   currentHealth: 0
   healthBar: {fileID: 181074975084284913}
   meat: {fileID: 5319216807513416860, guid: b0305757855c90f4998bd84d02467d91, type: 3}
@@ -668,19 +667,6 @@ MonoBehaviour:
   firePoint: {fileID: 1213698648890042588}
   bulletPrefab: {fileID: 4956992089290874515, guid: 246c6f4d98d56eb4f86dea4fdd25c06c, type: 3}
   rateOfFire: 2
---- !u!114 &2078990700142716673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5701034914861035247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4340bba25a4a2714e9a0b2aba68a0acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EM: {fileID: 6834836778122951779}
 --- !u!1 &6066491250950103264
 GameObject:
   m_ObjectHideFlags: 0

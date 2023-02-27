@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     public static bool isDead;
+    int tagChecker;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
 
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        tagChecker = this.gameObject.layer;
     }
 
     // Update is called once per frame
@@ -41,10 +45,14 @@ public class EnemyMovement : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        else if(hitInfo.tag == "BossStage" && tagChecker == 10)
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
         else if (hitInfo.tag == "Bullet")
         {
             DamageTaken(1);
-        }
+        } 
     }
 
     private void DamageTaken(int damage)
@@ -55,8 +63,16 @@ public class EnemyMovement : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            isDead = true;
-            Death();
+            if(tagChecker == 10)
+            {
+                Destroy(this.gameObject); // Destroy current game object
+                SceneManager.LoadScene("VictoryScreen");
+            }
+            else
+            {
+                isDead = true;
+                Death();
+            }
         }
     }
 
