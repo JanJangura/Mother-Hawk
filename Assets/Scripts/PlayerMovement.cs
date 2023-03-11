@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (hitInfo.tag == "Meat2")
             {
-                if (currentHealth < maxHealth)
+                if (currentHealth <= maxHealth)
                 {
                     Heal(pt2);
                 }

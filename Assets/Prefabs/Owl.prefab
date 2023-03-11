@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  maxHealth: 8
+  enemyGO: {fileID: 2206167726168010041}
+  maxHealth: 9
   currentHealth: 0
   healthBar: {fileID: 5933224881492415720}
   meat: {fileID: 5319216807513416860, guid: b0305757855c90f4998bd84d02467d91, type: 3}

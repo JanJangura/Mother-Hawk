@@ -39,8 +39,8 @@ public class MeatManager : MonoBehaviour
             {
                 PM.currentHealth = PM.currentHealth + 2;
             }
-            RS.minTime--;
-            RS.maxTime--;
+            RS.minTime = RS.minTime - .5f;
+            RS.maxTime = RS.maxTime - .5f;
             ColorSwitch();
         }        
     }

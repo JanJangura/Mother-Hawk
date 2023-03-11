@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
     public float speed;
+    public GameObject enemyGO;
 
     [Header("Health")]
     public int maxHealth;
@@ -30,13 +33,12 @@ public class EnemyMovement : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 
-        tagChecker = this.gameObject.layer;
+        tagChecker = this.gameObject.layer;     
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
@@ -65,8 +67,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if(tagChecker == 10)
             {
-                Destroy(this.gameObject); // Destroy current game object
-                SceneManager.LoadScene("VictoryScreen");
+                BossDeath();
             }
             else
             {
@@ -81,5 +82,11 @@ public class EnemyMovement : MonoBehaviour
         //Instatiate(deathEffect, transform.position, Quaternion.identity);
         Instantiate(meat, enemyPrefab.transform.position, Quaternion.identity);
         Destroy(this.gameObject); // Destroy current game object
+    }
+
+    void BossDeath()
+    {
+        Destroy(this.gameObject); // Destroy current game object
+        SceneManager.LoadScene("VictoryScreen");
     }
 }
