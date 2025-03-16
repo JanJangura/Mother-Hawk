@@ -20,9 +20,18 @@ public class DestroyFeathers : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "Enemy" || hitInfo.tag == "BelowScreen" || hitInfo.tag == "AboveScreen")
+        if (hitInfo.tag == "Enemy")
         {
-            Destroy(gameObject);
+            EnemyMovement enemy = hitInfo.GetComponent<EnemyMovement>();
+            if (enemy != null)
+            {
+                if (!enemy.isDead) Destroy(this.gameObject);
+                else return;
+            }
         }       
+        if (hitInfo.tag == "BelowScreen" || hitInfo.tag == "AboveScreen")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -31,6 +31,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Meat")]
     public MeatManager MM;
 
+    [Header("Sound Effects")]
+    public AudioSource hitSource;
+    public AudioClip[] hitEffects;
+    public AudioSource healSource;
+    public AudioClip[] healingEffects;
+    public AudioSource featherSource;
+    public AudioClip[] featherEffects;
+
     int pt1 = 1;
     int pt2 = 2;
     int holder;
@@ -86,7 +94,16 @@ public class PlayerMovement : MonoBehaviour
         Physics2D.IgnoreLayerCollision(3, 9);
         if (hitInfo.tag != null)
         {
-            if (hitInfo.tag == "EnemyBullet" || hitInfo.tag == "Enemy")
+            if (hitInfo.tag == "Enemy")
+            {
+                EnemyMovement enemy = hitInfo.GetComponent<EnemyMovement>();
+                if (enemy != null)
+                {
+                    if(!enemy.isDead) DamageTaken(1);
+                }
+            }
+
+            if(hitInfo.tag == "EnemyBullet")
             {
                 DamageTaken(1);
             }
@@ -94,26 +111,11 @@ public class PlayerMovement : MonoBehaviour
             
             if (hitInfo.tag == "Meat" )
             {
-                if (currentHealth < maxHealth) 
-                 {
-                    
-                    Heal(pt1);
-                 }
-                else
-                {
-                    MM.meatCount = MM.meatCount + pt1;
-                }
+                Heal(pt1);
             }
             if (hitInfo.tag == "Meat2")
             {
-                if (currentHealth <= maxHealth)
-                {
-                    Heal(pt2);
-                }
-                else
-                {
-                    MM.meatCount = MM.meatCount + pt2;
-                }
+                Heal(pt2);
             }
 
             if(MM.meatCount >= 10)
@@ -126,14 +128,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Heal(int health)
     {
+        PlaySoundEffect(healSource, healingEffects);
         MM.meatCount = MM.meatCount + health;
-        currentHealth = currentHealth + health;
+        int healthHolder = currentHealth + health;
+
+        if (healthHolder >= maxHealth) currentHealth = maxHealth; 
+        else currentHealth = healthHolder; 
         healthBar.SetHealth(currentHealth);
     }
 
     void DamageTaken(int damage)
     {
         currentHealth -= damage;
+
+        PlaySoundEffect(hitSource, hitEffects);
 
         healthBar.SetHealth(currentHealth);
 
@@ -150,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
         // Shooting Logic
         if(timer > nextFire)
         {
+            PlaySoundEffect(featherSource, featherEffects);
             nextFire = Time.time + FireRate;
             Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
         }
@@ -162,5 +171,15 @@ public class PlayerMovement : MonoBehaviour
         Destroy(this.gameObject);
         Time.timeScale = 1f;
         SceneManager.LoadScene("DeathScreen");
+    }
+
+    void PlaySoundEffect(AudioSource audioSource, AudioClip[] audioClips)
+    {
+        if(audioClips.Length > 0 && audioSource)
+        {
+            int randomIndex = Random.Range(0, audioClips.Length); // Picks a random number
+            audioSource.clip = audioClips[randomIndex];
+            audioSource.Play();
+        }
     }
 }

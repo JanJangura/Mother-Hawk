@@ -10,6 +10,13 @@ public class EnemyFire : MonoBehaviour
     private float timer;
     public float rateOfFire = 2;
 
+    private EnemyMovement enemyScript;
+
+    private void Start()
+    {
+        enemyScript = GetComponent<EnemyMovement>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +32,7 @@ public class EnemyFire : MonoBehaviour
 
     void Shoot()
     {
+        if (enemyScript && enemyScript.isDead) return;
         // Shooting Logic
         // To spawn object we use instantiate, the prefab, the position of spawn, then the rotation.
         Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);

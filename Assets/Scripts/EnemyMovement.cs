@@ -19,14 +19,21 @@ public class EnemyMovement : MonoBehaviour
     public GameObject meat;
     public Transform enemyPrefab;
 
+    [Header("SoundEffects")]
+    private AudioSource EnemySoundSource;
+    public AudioClip[] hitEffects;
+    public AudioClip[] deathEffects;
+
     private Rigidbody2D rb;
 
-    public static bool isDead;
+    public bool isDead;
     int tagChecker;
 
     // Start is called before the first frame update
     void Start()
     {
+        EnemySoundSource = GetComponent<AudioSource>();
+
         rb = this.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(0, -speed);
 
@@ -59,11 +66,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void DamageTaken(int damage)
     {
+        if (isDead) return; 
+  
         currentHealth -= damage;
-        
         healthBar.SetHealth(currentHealth);
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             if(tagChecker == 10)
             {
@@ -71,9 +79,12 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                isDead = true;
                 Death();
             }
+        }
+        else
+        {
+            PlaySoundEffect(hitEffects, false);
         }
     }
 
@@ -81,12 +92,27 @@ public class EnemyMovement : MonoBehaviour
     {
         //Instatiate(deathEffect, transform.position, Quaternion.identity);
         Instantiate(meat, enemyPrefab.transform.position, Quaternion.identity);
-        Destroy(this.gameObject); // Destroy current game object
+        if (deathEffects.Length == 0) Destroy(this.gameObject); // Destroy current game object
+        else PlaySoundEffect(deathEffects, true);
     }
 
     void BossDeath()
     {
         Destroy(this.gameObject); // Destroy current game object
         SceneManager.LoadScene("VictoryScreen");
+    }
+
+    void PlaySoundEffect(AudioClip[] audioClips, bool isDeath)
+    {
+        isDead = isDeath;
+        if (audioClips.Length > 0 && EnemySoundSource)
+        {
+            System.Random rng = new System.Random();
+            int randomIndex = rng.Next(0, audioClips.Length); // Picks a random number
+            EnemySoundSource.clip = audioClips[randomIndex];
+            EnemySoundSource.Play();
+
+            if(isDead) Destroy(this.gameObject, audioClips[randomIndex].length); 
+        }
     }
 }
